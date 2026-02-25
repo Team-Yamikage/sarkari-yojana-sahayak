@@ -14,7 +14,102 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      eligibility_checks: {
+        Row: {
+          age: number
+          ai_response: string | null
+          annual_income: number
+          category: string
+          created_at: string
+          district: string
+          gender: string
+          has_disability: boolean | null
+          id: string
+          name: string
+          occupation: string
+          state: string
+        }
+        Insert: {
+          age: number
+          ai_response?: string | null
+          annual_income: number
+          category: string
+          created_at?: string
+          district: string
+          gender: string
+          has_disability?: boolean | null
+          id?: string
+          name: string
+          occupation: string
+          state: string
+        }
+        Update: {
+          age?: number
+          ai_response?: string | null
+          annual_income?: number
+          category?: string
+          created_at?: string
+          district?: string
+          gender?: string
+          has_disability?: boolean | null
+          id?: string
+          name?: string
+          occupation?: string
+          state?: string
+        }
+        Relationships: []
+      }
+      schemes: {
+        Row: {
+          apply_link: string | null
+          category: string
+          created_at: string
+          deadline: string | null
+          description_en: string | null
+          description_hi: string | null
+          eligibility_criteria: Json | null
+          id: string
+          is_active: boolean | null
+          name_en: string
+          name_hi: string
+          required_documents: string[] | null
+          target_group: string[] | null
+          updated_at: string
+        }
+        Insert: {
+          apply_link?: string | null
+          category?: string
+          created_at?: string
+          deadline?: string | null
+          description_en?: string | null
+          description_hi?: string | null
+          eligibility_criteria?: Json | null
+          id?: string
+          is_active?: boolean | null
+          name_en: string
+          name_hi: string
+          required_documents?: string[] | null
+          target_group?: string[] | null
+          updated_at?: string
+        }
+        Update: {
+          apply_link?: string | null
+          category?: string
+          created_at?: string
+          deadline?: string | null
+          description_en?: string | null
+          description_hi?: string | null
+          eligibility_criteria?: Json | null
+          id?: string
+          is_active?: boolean | null
+          name_en?: string
+          name_hi?: string
+          required_documents?: string[] | null
+          target_group?: string[] | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
