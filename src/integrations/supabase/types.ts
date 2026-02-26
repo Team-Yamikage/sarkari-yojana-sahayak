@@ -14,6 +14,32 @@ export type Database = {
   }
   public: {
     Tables: {
+      districts: {
+        Row: {
+          id: number
+          name: string
+          state_id: number
+        }
+        Insert: {
+          id?: number
+          name: string
+          state_id: number
+        }
+        Update: {
+          id?: number
+          name?: string
+          state_id?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "districts_state_id_fkey"
+            columns: ["state_id"]
+            isOneToOne: false
+            referencedRelation: "states"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       eligibility_checks: {
         Row: {
           age: number
@@ -107,6 +133,21 @@ export type Database = {
           required_documents?: string[] | null
           target_group?: string[] | null
           updated_at?: string
+        }
+        Relationships: []
+      }
+      states: {
+        Row: {
+          id: number
+          name: string
+        }
+        Insert: {
+          id?: number
+          name: string
+        }
+        Update: {
+          id?: number
+          name?: string
         }
         Relationships: []
       }

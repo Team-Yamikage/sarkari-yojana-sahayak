@@ -14,7 +14,6 @@ const Navbar = () => {
     { to: "/eligibility", label: t("पात्रता जांचें", "Check Eligibility") },
     { to: "/schemes", label: t("योजना समझें", "Scheme Explainer") },
     { to: "/letter", label: t("पत्र बनाएं", "Letter Generator") },
-    { to: "/admin", label: t("एडमिन", "Admin") },
     { to: "/about", label: t("हमारे बारे में", "About") },
   ];
 

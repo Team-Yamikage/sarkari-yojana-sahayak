@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useLang } from "@/contexts/LanguageContext";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -9,26 +9,45 @@ import { supabase } from "@/integrations/supabase/client";
 import { Loader2 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 
-const STATES = [
-  "Uttar Pradesh", "Maharashtra", "Bihar", "Madhya Pradesh", "Rajasthan",
-  "Tamil Nadu", "Karnataka", "Gujarat", "Andhra Pradesh", "West Bengal",
-  "Jharkhand", "Chhattisgarh", "Odisha", "Punjab", "Haryana",
-  "Delhi", "Uttarakhand", "Himachal Pradesh", "Assam", "Kerala",
-  "Telangana", "Jammu & Kashmir", "Goa", "Tripura", "Meghalaya",
-  "Manipur", "Nagaland", "Mizoram", "Arunachal Pradesh", "Sikkim",
-];
+interface StateRow { id: number; name: string; }
+interface DistrictRow { id: number; name: string; state_id: number; }
 
 const EligibilityChecker = () => {
   const { t, lang } = useLang();
   const { toast } = useToast();
   const [loading, setLoading] = useState(false);
   const [result, setResult] = useState("");
+  const [states, setStates] = useState<StateRow[]>([]);
+  const [districts, setDistricts] = useState<DistrictRow[]>([]);
+  const [filteredDistricts, setFilteredDistricts] = useState<DistrictRow[]>([]);
   const [form, setForm] = useState({
     name: "", age: "", gender: "", state: "", district: "",
     category: "", occupation: "", annual_income: "", has_disability: "no",
   });
 
-  const update = (key: string, val: string) => setForm((p) => ({ ...p, [key]: val }));
+  useEffect(() => {
+    const load = async () => {
+      const [sRes, dRes] = await Promise.all([
+        supabase.from("states").select("*").order("name"),
+        supabase.from("districts").select("*").order("name"),
+      ]);
+      if (sRes.data) setStates(sRes.data as any);
+      if (dRes.data) setDistricts(dRes.data as any);
+    };
+    load();
+  }, []);
+
+  const update = (key: string, val: string) => {
+    setForm((p) => {
+      const next = { ...p, [key]: val };
+      if (key === "state") {
+        next.district = "";
+        const st = states.find(s => s.name === val);
+        setFilteredDistricts(st ? districts.filter(d => d.state_id === st.id) : []);
+      }
+      return next;
+    });
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -49,10 +68,9 @@ const EligibilityChecker = () => {
       if (resp.error) throw resp.error;
       setResult(resp.data?.result || t("कोई जवाब नहीं मिला", "No response received"));
 
-      // Save to DB
       await supabase.from("eligibility_checks").insert({
         name: form.name, age: parseInt(form.age), gender: form.gender,
-        state: form.state, district: form.district, category: form.category,
+        state: form.state, district: form.district || "N/A", category: form.category,
         occupation: form.occupation, annual_income: parseInt(form.annual_income),
         has_disability: form.has_disability === "yes", ai_response: resp.data?.result,
       });
@@ -107,13 +125,18 @@ const EligibilityChecker = () => {
                   <Select value={form.state} onValueChange={(v) => update("state", v)}>
                     <SelectTrigger><SelectValue placeholder={t("चुनें", "Select")} /></SelectTrigger>
                     <SelectContent>
-                      {STATES.map((s) => <SelectItem key={s} value={s}>{s}</SelectItem>)}
+                      {states.map((s) => <SelectItem key={s.id} value={s.name}>{s.name}</SelectItem>)}
                     </SelectContent>
                   </Select>
                 </div>
                 <div>
                   <Label className="font-hindi">{t("जिला", "District")}</Label>
-                  <Input value={form.district} onChange={(e) => update("district", e.target.value)} placeholder={t("जिले का नाम", "District name")} />
+                  <Select value={form.district} onValueChange={(v) => update("district", v)} disabled={!form.state}>
+                    <SelectTrigger><SelectValue placeholder={t("चुनें", "Select")} /></SelectTrigger>
+                    <SelectContent>
+                      {filteredDistricts.map((d) => <SelectItem key={d.id} value={d.name}>{d.name}</SelectItem>)}
+                    </SelectContent>
+                  </Select>
                 </div>
               </div>
               <div className="grid grid-cols-2 gap-3">
@@ -167,7 +190,6 @@ const EligibilityChecker = () => {
           </CardContent>
         </Card>
 
-        {/* Result */}
         <Card className={result ? "border-success/30" : ""}>
           <CardHeader>
             <CardTitle className="font-hindi">{t("AI का जवाब", "AI Response")}</CardTitle>
@@ -179,9 +201,7 @@ const EligibilityChecker = () => {
                 <span className="ml-3 font-hindi text-muted-foreground">{t("AI सोच रहा है...", "AI is thinking...")}</span>
               </div>
             ) : result ? (
-              <div className="prose prose-sm max-w-none font-hindi whitespace-pre-wrap text-foreground">
-                {result}
-              </div>
+              <div className="prose prose-sm max-w-none font-hindi whitespace-pre-wrap text-foreground">{result}</div>
             ) : (
               <p className="text-muted-foreground text-center py-12 font-hindi">
                 {t("अपनी जानकारी भरें और जवाब यहाँ दिखेगा", "Fill your details and response will appear here")}
