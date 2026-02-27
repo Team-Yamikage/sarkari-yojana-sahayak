@@ -10,6 +10,7 @@ import Index from "./pages/Index";
 import EligibilityChecker from "./pages/EligibilityChecker";
 import SchemeExplainer from "./pages/SchemeExplainer";
 import LetterGenerator from "./pages/LetterGenerator";
+import GovtJobs from "./pages/GovtJobs";
 import AdminPanel from "./pages/AdminPanel";
 import About from "./pages/About";
 import NotFound from "./pages/NotFound";
@@ -31,6 +32,7 @@ const App = () => (
                 <Route path="/eligibility" element={<EligibilityChecker />} />
                 <Route path="/schemes" element={<SchemeExplainer />} />
                 <Route path="/letter" element={<LetterGenerator />} />
+                <Route path="/govt-jobs" element={<GovtJobs />} />
                 <Route path="/admin" element={<AdminPanel />} />
                 <Route path="/about" element={<About />} />
                 <Route path="*" element={<NotFound />} />
