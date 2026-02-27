@@ -85,6 +85,78 @@ export type Database = {
         }
         Relationships: []
       }
+      govt_jobs: {
+        Row: {
+          age_relaxation_obc: number | null
+          age_relaxation_sc_st: number | null
+          apply_link: string | null
+          category_reservation: string[] | null
+          created_at: string
+          department: string
+          description: string | null
+          fee_general: number | null
+          fee_obc: number | null
+          fee_sc_st: number | null
+          id: string
+          is_active: boolean | null
+          max_age: number
+          min_age: number
+          post_name: string
+          qualification: string
+          registration_end: string
+          registration_start: string
+          selection_process: string | null
+          state: string | null
+          total_vacancies: number
+        }
+        Insert: {
+          age_relaxation_obc?: number | null
+          age_relaxation_sc_st?: number | null
+          apply_link?: string | null
+          category_reservation?: string[] | null
+          created_at?: string
+          department: string
+          description?: string | null
+          fee_general?: number | null
+          fee_obc?: number | null
+          fee_sc_st?: number | null
+          id?: string
+          is_active?: boolean | null
+          max_age?: number
+          min_age?: number
+          post_name: string
+          qualification?: string
+          registration_end?: string
+          registration_start?: string
+          selection_process?: string | null
+          state?: string | null
+          total_vacancies?: number
+        }
+        Update: {
+          age_relaxation_obc?: number | null
+          age_relaxation_sc_st?: number | null
+          apply_link?: string | null
+          category_reservation?: string[] | null
+          created_at?: string
+          department?: string
+          description?: string | null
+          fee_general?: number | null
+          fee_obc?: number | null
+          fee_sc_st?: number | null
+          id?: string
+          is_active?: boolean | null
+          max_age?: number
+          min_age?: number
+          post_name?: string
+          qualification?: string
+          registration_end?: string
+          registration_start?: string
+          selection_process?: string | null
+          state?: string | null
+          total_vacancies?: number
+        }
+        Relationships: []
+      }
       schemes: {
         Row: {
           apply_link: string | null
