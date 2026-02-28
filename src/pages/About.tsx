@@ -14,9 +14,7 @@ const About = () => {
       <Card>
         <CardContent className="pt-6">
           <div className="flex flex-col items-center text-center mb-6">
-            <div className="w-20 h-20 rounded-full gradient-saffron flex items-center justify-center mb-4">
-              <User className="h-10 w-10 text-primary-foreground" />
-            </div>
+            <img src="/logo.png" alt="Sarkari Yojana Mitra AI" className="w-20 h-20 rounded-full mb-4" />
             <h2 className="text-xl font-bold">Shashank Shekhar Verma</h2>
             <p className="text-muted-foreground text-sm mt-1">
               {t("कक्षा 12 विद्यार्थी", "Class 12 Student")}

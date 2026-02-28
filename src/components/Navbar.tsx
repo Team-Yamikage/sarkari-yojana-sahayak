@@ -24,7 +24,8 @@ const Navbar = () => {
     <nav className="sticky top-0 z-50 bg-card/95 backdrop-blur border-b">
       <div className="container flex items-center justify-between h-14 md:h-16">
         <Link to="/" className="flex items-center gap-2 font-bold text-lg">
-          <span className="text-gradient-primary font-hindi">🇮🇳 {t("सरकारी योजना मित्र", "Yojana Mitra")}</span>
+          <img src="/logo.png" alt="Sarkari Yojana Mitra AI" className="h-8 w-8 rounded-full" />
+          <span className="text-gradient-primary font-hindi">{t("सरकारी योजना मित्र", "Yojana Mitra")}</span>
         </Link>
 
         {/* Desktop */}
