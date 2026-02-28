@@ -40,6 +40,7 @@ const Index = () => {
       {/* Hero */}
       <section className="gradient-saffron py-16 md:py-24">
         <div className="container text-center">
+          <img src="/logo.png" alt="Sarkari Yojana Mitra AI" className="h-24 w-24 mx-auto mb-4 rounded-full bg-white/90 p-1" />
           <h1 className="text-3xl md:text-5xl font-bold text-primary-foreground font-hindi leading-tight">
             {t("सरकारी योजना मित्र AI", "Sarkari Yojana Mitra AI")}
           </h1>
