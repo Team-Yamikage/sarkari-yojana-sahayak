@@ -1,21 +1,26 @@
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Menu, X, Globe } from "lucide-react";
+import { Menu, X, Globe, Sun, Moon, Heart } from "lucide-react";
 import { useLang } from "@/contexts/LanguageContext";
+import { useTheme } from "@/hooks/useTheme";
+import { useBookmarks } from "@/hooks/useBookmarks";
 import { Button } from "@/components/ui/button";
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
   const { lang, toggleLang, t } = useLang();
+  const { dark, toggleTheme } = useTheme();
+  const { totalCount } = useBookmarks();
   const location = useLocation();
 
   const links = [
     { to: "/", label: t("होम", "Home") },
-    { to: "/eligibility", label: t("पात्रता जांचें", "Check Eligibility") },
-    { to: "/schemes", label: t("योजना समझें", "Scheme Explainer") },
-    { to: "/letter", label: t("पत्र बनाएं", "Letter Generator") },
-    { to: "/govt-jobs", label: t("सरकारी नौकरी", "Govt Jobs") },
-    { to: "/about", label: t("हमारे बारे में", "About") },
+    { to: "/eligibility", label: t("पात्रता जांचें", "Eligibility") },
+    { to: "/schemes", label: t("योजनाएं", "Schemes") },
+    { to: "/letter", label: t("पत्र बनाएं", "Letter") },
+    { to: "/govt-jobs", label: t("नौकरी", "Jobs") },
+    { to: "/documents", label: t("दस्तावेज़", "Documents") },
+    { to: "/compare", label: t("तुलना", "Compare") },
   ];
 
   const isActive = (path: string) => location.pathname === path;
@@ -25,16 +30,16 @@ const Navbar = () => {
       <div className="container flex items-center justify-between h-14 md:h-16">
         <Link to="/" className="flex items-center gap-2 font-bold text-lg">
           <img src="/logo.png" alt="Sarkari Yojana Mitra AI" className="h-8 w-8 rounded-full" />
-          <span className="text-gradient-primary font-hindi">{t("सरकारी योजना मित्र", "Yojana Mitra")}</span>
+          <span className="text-gradient-primary font-hindi hidden sm:inline">{t("सरकारी योजना मित्र", "Yojana Mitra")}</span>
         </Link>
 
         {/* Desktop */}
-        <div className="hidden md:flex items-center gap-1">
+        <div className="hidden lg:flex items-center gap-1">
           {links.map((l) => (
             <Link
               key={l.to}
               to={l.to}
-              className={`px-3 py-2 rounded-md text-sm font-medium transition-colors ${
+              className={`px-2.5 py-2 rounded-md text-sm font-medium transition-colors ${
                 isActive(l.to)
                   ? "bg-primary text-primary-foreground"
                   : "text-foreground hover:bg-accent"
@@ -43,14 +48,36 @@ const Navbar = () => {
               {l.label}
             </Link>
           ))}
-          <Button variant="outline" size="sm" onClick={toggleLang} className="ml-2 gap-1">
+          <Link to="/saved" className="relative px-2.5 py-2 rounded-md text-sm font-medium transition-colors hover:bg-accent">
+            <Heart className={`h-4 w-4 ${isActive("/saved") ? "text-primary fill-primary" : ""}`} />
+            {totalCount > 0 && (
+              <span className="absolute -top-1 -right-1 bg-destructive text-destructive-foreground text-[10px] rounded-full h-4 w-4 flex items-center justify-center">
+                {totalCount}
+              </span>
+            )}
+          </Link>
+          <Button variant="ghost" size="icon" onClick={toggleTheme} className="ml-1 h-9 w-9">
+            {dark ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
+          </Button>
+          <Button variant="outline" size="sm" onClick={toggleLang} className="ml-1 gap-1">
             <Globe className="h-4 w-4" />
             {lang === "hi" ? "EN" : "हि"}
           </Button>
         </div>
 
         {/* Mobile */}
-        <div className="flex md:hidden items-center gap-2">
+        <div className="flex lg:hidden items-center gap-1">
+          <Link to="/saved" className="relative p-2">
+            <Heart className={`h-4 w-4 ${isActive("/saved") ? "text-primary fill-primary" : ""}`} />
+            {totalCount > 0 && (
+              <span className="absolute -top-0.5 -right-0.5 bg-destructive text-destructive-foreground text-[10px] rounded-full h-4 w-4 flex items-center justify-center">
+                {totalCount}
+              </span>
+            )}
+          </Link>
+          <Button variant="ghost" size="icon" onClick={toggleTheme} className="h-9 w-9">
+            {dark ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
+          </Button>
           <Button variant="outline" size="sm" onClick={toggleLang} className="gap-1">
             <Globe className="h-4 w-4" />
             {lang === "hi" ? "EN" : "हि"}
@@ -63,7 +90,7 @@ const Navbar = () => {
 
       {/* Mobile menu */}
       {open && (
-        <div className="md:hidden border-t bg-card pb-3">
+        <div className="lg:hidden border-t bg-card pb-3">
           {links.map((l) => (
             <Link
               key={l.to}
@@ -76,6 +103,9 @@ const Navbar = () => {
               {l.label}
             </Link>
           ))}
+          <Link to="/about" onClick={() => setOpen(false)} className="block px-4 py-2.5 text-sm font-medium text-foreground">
+            {t("हमारे बारे में", "About")}
+          </Link>
         </div>
       )}
     </nav>

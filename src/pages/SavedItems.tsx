@@ -17,25 +17,15 @@ const SavedItems = () => {
   useEffect(() => {
     const fetchData = async () => {
       setLoading(true);
-      const promises: Promise<void>[] = [];
-
       if (schemeIds.length > 0) {
-        promises.push(
-          supabase.from("schemes").select("*").in("id", schemeIds).then(({ data }) => {
-            if (data) setSchemes(data);
-          })
-        );
+        const { data } = await supabase.from("schemes").select("*").in("id", schemeIds);
+        if (data) setSchemes(data);
       } else setSchemes([]);
 
       if (jobIds.length > 0) {
-        promises.push(
-          supabase.from("govt_jobs").select("*").in("id", jobIds).then(({ data }) => {
-            if (data) setJobs(data);
-          })
-        );
+        const { data } = await supabase.from("govt_jobs").select("*").in("id", jobIds);
+        if (data) setJobs(data);
       } else setJobs([]);
-
-      await Promise.all(promises);
       setLoading(false);
     };
     fetchData();

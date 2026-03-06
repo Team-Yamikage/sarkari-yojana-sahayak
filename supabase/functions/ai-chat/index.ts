@@ -31,6 +31,11 @@ serve(async (req) => {
         ? "तुम एक हिंदी पत्र लेखक AI हो। उपयोगकर्ता के कारण के अनुसार एक प्रोफेशनल हिंदी आवेदन पत्र बनाओ। पत्र में तारीख, विषय, संबोधन, मुख्य विषय और हस्ताक्षर शामिल हों।"
         : "You are a Hindi letter writing AI. Generate a professional Hindi application letter based on the user's reason. Include date, subject, salutation, body, and signature.";
       userPrompt = `Reason: ${data.reason}, Name: ${data.name}, Details: ${data.details || "None"}`;
+    } else if (type === "chat") {
+      systemPrompt = lang === "hi"
+        ? "तुम सरकारी योजना मित्र AI हो। तुम सरकारी योजनाओं, पात्रता, दस्तावेज़ों और आवेदन प्रक्रिया के बारे में सरल हिंदी में मदद करते हो। संक्षिप्त और उपयोगी जवाब दो।"
+        : "You are Sarkari Yojana Mitra AI. You help with government schemes, eligibility, documents, and application process. Give concise, helpful answers.";
+      userPrompt = data.message || "";
     } else {
       throw new Error("Invalid type");
     }

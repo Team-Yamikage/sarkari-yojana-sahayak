@@ -6,8 +6,9 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Badge } from "@/components/ui/badge";
 import { supabase } from "@/integrations/supabase/client";
-import { Loader2, Search, FileText } from "lucide-react";
+import { Loader2, Search, FileText, Heart, Share2 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import { useBookmarks } from "@/hooks/useBookmarks";
 
 interface Scheme {
   id: string;
@@ -35,6 +36,7 @@ const CATEGORIES = [
 const SchemeExplainer = () => {
   const { t, lang } = useLang();
   const { toast } = useToast();
+  const { toggle, isBookmarked } = useBookmarks();
   const [searchQuery, setSearchQuery] = useState("");
   const [category, setCategory] = useState("all");
   const [schemes, setSchemes] = useState<Scheme[]>([]);
@@ -196,14 +198,30 @@ const SchemeExplainer = () => {
                       </div>
                     )}
                   </div>
-                  <Button
-                    size="sm"
-                    variant="outline"
-                    className="font-hindi flex-shrink-0"
-                    onClick={() => handleAiExplain(lang === "hi" ? s.name_hi : s.name_en)}
-                  >
-                    {t("समझें", "Explain")}
-                  </Button>
+                  <div className="flex flex-col gap-1.5 flex-shrink-0">
+                    <Button
+                      size="sm"
+                      variant="outline"
+                      className="font-hindi"
+                      onClick={() => handleAiExplain(lang === "hi" ? s.name_hi : s.name_en)}
+                    >
+                      {t("समझें", "Explain")}
+                    </Button>
+                    <div className="flex gap-1">
+                      <Button size="icon" variant="ghost" className="h-8 w-8" onClick={() => toggle("scheme", s.id)}>
+                        <Heart className={`h-4 w-4 ${isBookmarked("scheme", s.id) ? "fill-destructive text-destructive" : ""}`} />
+                      </Button>
+                      <Button
+                        size="icon" variant="ghost" className="h-8 w-8"
+                        onClick={() => {
+                          const text = `${lang === "hi" ? s.name_hi : s.name_en}\n${(lang === "hi" ? s.description_hi : s.description_en) || ""}\n\n— Sarkari Yojana Mitra AI`;
+                          window.open(`https://wa.me/?text=${encodeURIComponent(text)}`, "_blank");
+                        }}
+                      >
+                        <Share2 className="h-4 w-4" />
+                      </Button>
+                    </div>
+                  </div>
                 </div>
               </CardContent>
             </Card>

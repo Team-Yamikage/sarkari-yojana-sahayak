@@ -11,8 +11,9 @@ import { supabase } from "@/integrations/supabase/client";
 import { sampleGovtJobs } from "@/data/sampleGovtJobs";
 import {
   Loader2, Calendar, IndianRupee, GraduationCap, User, Briefcase,
-  CheckCircle2, AlertTriangle, ExternalLink, Users, ClipboardList
+  CheckCircle2, AlertTriangle, ExternalLink, Users, ClipboardList, Heart, Share2
 } from "lucide-react";
+import { useBookmarks } from "@/hooks/useBookmarks";
 
 interface GovtJob {
   id: string;
@@ -55,6 +56,7 @@ const qualificationRank = (q: string) => {
 
 const GovtJobs = () => {
   const { t, lang } = useLang();
+  const { toggle, isBookmarked } = useBookmarks();
   const [jobs, setJobs] = useState<GovtJob[]>([]);
   const [loading, setLoading] = useState(true);
   const [showUpcoming, setShowUpcoming] = useState(false);
@@ -346,13 +348,27 @@ const GovtJobs = () => {
                           {t("अंतिम:", "Last:")} {new Date(job.registration_end).toLocaleDateString("en-IN")}
                         </span>
                       </div>
-                      {job.apply_link && (
-                        <Button size="sm" asChild className="gap-1">
-                          <a href={job.apply_link} target="_blank" rel="noopener noreferrer">
-                            {t("आवेदन करें", "Apply Now")} <ExternalLink className="h-3.5 w-3.5" />
-                          </a>
+                      <div className="flex items-center gap-2">
+                        <Button size="icon" variant="ghost" className="h-8 w-8" onClick={() => toggle("job", job.id)}>
+                          <Heart className={`h-4 w-4 ${isBookmarked("job", job.id) ? "fill-destructive text-destructive" : ""}`} />
                         </Button>
-                      )}
+                        <Button
+                          size="icon" variant="ghost" className="h-8 w-8"
+                          onClick={() => {
+                            const text = `${job.post_name} — ${job.department}\n${t("पद:", "Posts:")} ${job.total_vacancies}\n${t("अंतिम तिथि:", "Last Date:")} ${new Date(job.registration_end).toLocaleDateString("en-IN")}\n${job.apply_link || ""}\n\n— Sarkari Yojana Mitra AI`;
+                            window.open(`https://wa.me/?text=${encodeURIComponent(text)}`, "_blank");
+                          }}
+                        >
+                          <Share2 className="h-4 w-4" />
+                        </Button>
+                        {job.apply_link && (
+                          <Button size="sm" asChild className="gap-1">
+                            <a href={job.apply_link} target="_blank" rel="noopener noreferrer">
+                              {t("आवेदन करें", "Apply Now")} <ExternalLink className="h-3.5 w-3.5" />
+                            </a>
+                          </Button>
+                        )}
+                      </div>
                     </div>
                   </CardContent>
                 </Card>
