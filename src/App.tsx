@@ -6,11 +6,15 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { LanguageProvider } from "@/contexts/LanguageContext";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import AIChatbot from "@/components/AIChatbot";
 import Index from "./pages/Index";
 import EligibilityChecker from "./pages/EligibilityChecker";
 import SchemeExplainer from "./pages/SchemeExplainer";
 import LetterGenerator from "./pages/LetterGenerator";
 import GovtJobs from "./pages/GovtJobs";
+import DocumentChecklist from "./pages/DocumentChecklist";
+import SchemeCompare from "./pages/SchemeCompare";
+import SavedItems from "./pages/SavedItems";
 import AdminPanel from "./pages/AdminPanel";
 import About from "./pages/About";
 import NotFound from "./pages/NotFound";
@@ -33,12 +37,16 @@ const App = () => (
                 <Route path="/schemes" element={<SchemeExplainer />} />
                 <Route path="/letter" element={<LetterGenerator />} />
                 <Route path="/govt-jobs" element={<GovtJobs />} />
+                <Route path="/documents" element={<DocumentChecklist />} />
+                <Route path="/compare" element={<SchemeCompare />} />
+                <Route path="/saved" element={<SavedItems />} />
                 <Route path="/admin" element={<AdminPanel />} />
                 <Route path="/about" element={<About />} />
                 <Route path="*" element={<NotFound />} />
               </Routes>
             </main>
             <Footer />
+            <AIChatbot />
           </div>
         </BrowserRouter>
       </LanguageProvider>
