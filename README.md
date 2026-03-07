@@ -54,30 +54,33 @@ Switch between Hindi (हिंदी) and English with a single click. The enti
 
 ## 📸 Screenshots
 
-### Homepage
-The landing page with a hero section, target audience cards, and feature overview.
+> 🔗 **[View Live Demo →](https://gram-yojana-samajh.lovable.app)**
 
-![Homepage](public/screenshots/homepage.png)
+### 1. Homepage
+The landing page with hero section, target audience cards (Students, Farmers, Low-income families, Senior citizens), and feature overview with saffron-white-green theme.
 
-### Eligibility Checker
-AI-powered form to check scheme eligibility based on personal details.
+![Homepage](https://img.shields.io/badge/View-Homepage-orange?style=for-the-badge&logo=google-chrome&logoColor=white)
 
-![Eligibility Checker](public/screenshots/eligibility.png)
+### 2. AI Eligibility Checker
+Smart form with fields for age, income, state, category, and occupation. AI analyzes your profile and recommends eligible government schemes with application steps.
 
-### Government Jobs
-Browse and filter latest government job vacancies with detailed information.
+![Eligibility](https://img.shields.io/badge/View-Eligibility_Checker-blue?style=for-the-badge&logo=google-chrome&logoColor=white)
 
-![Government Jobs](public/screenshots/jobs.png)
+### 3. Government Jobs Finder
+Browse latest sarkari naukri vacancies with department, qualifications, age limits, fees by category, registration dates, and direct apply links. Includes WhatsApp sharing.
 
-### Document Checklist
-Interactive document checklist with progress tracking and print support.
+![Jobs](https://img.shields.io/badge/View-Govt_Jobs-green?style=for-the-badge&logo=google-chrome&logoColor=white)
 
-![Document Checklist](public/screenshots/documents.png)
+### 4. Document Checklist & Scheme Comparison
+- **Document Checklist**: Select a scheme → get interactive checkbox list → track progress → print
+- **Scheme Compare**: Pick up to 3 schemes → side-by-side comparison table
 
-### Scheme Comparison
-Side-by-side comparison of multiple government schemes.
+![Tools](https://img.shields.io/badge/View-Tools-purple?style=for-the-badge&logo=google-chrome&logoColor=white)
 
-![Scheme Comparison](public/screenshots/compare.png)
+### 5. AI Chatbot & Dark Mode
+Floating AI assistant on every page for instant help. Dark mode toggle for comfortable reading.
+
+![AI Chat](https://img.shields.io/badge/View-AI_Chatbot-red?style=for-the-badge&logo=google-chrome&logoColor=white)
 
 ---
 
