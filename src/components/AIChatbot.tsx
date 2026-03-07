@@ -48,7 +48,7 @@ const AIChatbot = () => {
       {/* Floating Button */}
       <button
         onClick={() => setOpen(!open)}
-        className="fixed bottom-5 right-5 z-50 h-14 w-14 rounded-2xl btn-soft text-primary-foreground flex items-center justify-center hover:scale-105 transition-transform"
+        className="fixed bottom-5 right-5 z-50 h-14 w-14 rounded-full bg-primary text-primary-foreground shadow-lg flex items-center justify-center hover:scale-105 transition-transform"
         aria-label="Chat"
       >
         {open ? <X className="h-6 w-6" /> : <MessageCircle className="h-6 w-6" />}
@@ -56,9 +56,9 @@ const AIChatbot = () => {
 
       {/* Chat Panel */}
       {open && (
-        <div className="fixed bottom-22 right-5 z-50 w-[340px] max-w-[calc(100vw-2.5rem)] h-[460px] glass-panel-strong rounded-2xl neu-raised flex flex-col overflow-hidden">
+        <div className="fixed bottom-22 right-5 z-50 w-[340px] max-w-[calc(100vw-2.5rem)] h-[460px] bg-card border rounded-xl shadow-2xl flex flex-col overflow-hidden">
           {/* Header */}
-          <div className="gradient-primary text-primary-foreground px-4 py-3 flex items-center gap-2">
+          <div className="bg-primary text-primary-foreground px-4 py-3 flex items-center gap-2">
             <Bot className="h-5 w-5" />
             <span className="font-semibold font-hindi text-sm">{t("योजना मित्र AI", "Yojana Mitra AI")}</span>
           </div>
@@ -74,10 +74,10 @@ const AIChatbot = () => {
               <div key={i} className={`flex gap-2 ${m.role === "user" ? "justify-end" : "justify-start"}`}>
                 {m.role === "assistant" && <Bot className="h-5 w-5 text-primary mt-1 flex-shrink-0" />}
                 <div
-                  className={`max-w-[80%] rounded-xl px-3 py-2 text-sm whitespace-pre-wrap ${
+                  className={`max-w-[80%] rounded-lg px-3 py-2 text-sm whitespace-pre-wrap ${
                     m.role === "user"
-                      ? "gradient-primary text-primary-foreground"
-                      : "bg-accent text-foreground"
+                      ? "bg-primary text-primary-foreground"
+                      : "bg-muted text-foreground"
                   }`}
                 >
                   {m.content}
@@ -88,7 +88,7 @@ const AIChatbot = () => {
             {loading && (
               <div className="flex gap-2">
                 <Bot className="h-5 w-5 text-primary mt-1" />
-                <div className="bg-accent rounded-xl px-3 py-2">
+                <div className="bg-muted rounded-lg px-3 py-2">
                   <Loader2 className="h-4 w-4 animate-spin text-primary" />
                 </div>
               </div>
@@ -96,15 +96,15 @@ const AIChatbot = () => {
           </div>
 
           {/* Input */}
-          <form onSubmit={send} className="border-t border-border/50 p-2 flex gap-2">
+          <form onSubmit={send} className="border-t p-2 flex gap-2">
             <Input
               value={input}
               onChange={(e) => setInput(e.target.value)}
               placeholder={t("यहाँ टाइप करें...", "Type here...")}
-              className="text-sm font-hindi rounded-xl bg-accent/50 border-border/50"
+              className="text-sm font-hindi"
               disabled={loading}
             />
-            <Button type="submit" size="icon" disabled={loading || !input.trim()} className="rounded-xl btn-soft border-0 text-primary-foreground">
+            <Button type="submit" size="icon" disabled={loading || !input.trim()}>
               <Send className="h-4 w-4" />
             </Button>
           </form>
