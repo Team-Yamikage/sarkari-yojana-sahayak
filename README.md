@@ -59,28 +59,23 @@ Switch between Hindi (हिंदी) and English with a single click. The enti
 ### 1. Homepage
 The landing page with hero section, target audience cards (Students, Farmers, Low-income families, Senior citizens), and feature overview with saffron-white-green theme.
 
-![Homepage](https://img.shields.io/badge/View-Homepage-orange?style=for-the-badge&logo=google-chrome&logoColor=white)
+![Homepage](public/screenshots/homepage.png)
 
 ### 2. AI Eligibility Checker
 Smart form with fields for age, income, state, category, and occupation. AI analyzes your profile and recommends eligible government schemes with application steps.
 
-![Eligibility](https://img.shields.io/badge/View-Eligibility_Checker-blue?style=for-the-badge&logo=google-chrome&logoColor=white)
+![Eligibility Checker](public/screenshots/eligibility-checker.png)
 
-### 3. Government Jobs Finder
-Browse latest sarkari naukri vacancies with department, qualifications, age limits, fees by category, registration dates, and direct apply links. Includes WhatsApp sharing.
+### 3. Scheme Explainer
+Search any government scheme and get a clear, simple AI-powered explanation with quick-access buttons for popular schemes like PM Kisan, Ayushman Bharat, and more.
 
-![Jobs](https://img.shields.io/badge/View-Govt_Jobs-green?style=for-the-badge&logo=google-chrome&logoColor=white)
+![Scheme Explainer](public/screenshots/scheme-explainer.png)
 
-### 4. Document Checklist & Scheme Comparison
-- **Document Checklist**: Select a scheme → get interactive checkbox list → track progress → print
-- **Scheme Compare**: Pick up to 3 schemes → side-by-side comparison table
+### 4. Letter Generator
+Generate professional Hindi application letters for government offices. Select the purpose, enter your name and details — the AI creates a ready-to-use formal letter.
 
-![Tools](https://img.shields.io/badge/View-Tools-purple?style=for-the-badge&logo=google-chrome&logoColor=white)
+![Letter Generator](public/screenshots/letter-generator.png)
 
-### 5. AI Chatbot & Dark Mode
-Floating AI assistant on every page for instant help. Dark mode toggle for comfortable reading.
-
-![AI Chat](https://img.shields.io/badge/View-AI_Chatbot-red?style=for-the-badge&logo=google-chrome&logoColor=white)
 
 ---
 
