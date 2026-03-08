@@ -65,16 +65,8 @@ const Navbar = () => {
           </Button>
         </div>
 
-        {/* Mobile */}
+        {/* Mobile controls only (menu moved to bottom nav) */}
         <div className="flex lg:hidden items-center gap-1">
-          <Link to="/saved" className="relative p-2">
-            <Heart className={`h-4 w-4 ${isActive("/saved") ? "text-primary fill-primary" : ""}`} />
-            {totalCount > 0 && (
-              <span className="absolute -top-0.5 -right-0.5 bg-destructive text-destructive-foreground text-[10px] rounded-full h-4 w-4 flex items-center justify-center">
-                {totalCount}
-              </span>
-            )}
-          </Link>
           <Button variant="ghost" size="icon" onClick={toggleTheme} className="h-9 w-9">
             {dark ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
           </Button>
@@ -82,32 +74,8 @@ const Navbar = () => {
             <Globe className="h-4 w-4" />
             {lang === "hi" ? "EN" : "हि"}
           </Button>
-          <Button variant="ghost" size="sm" onClick={() => setOpen(!open)}>
-            {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
-          </Button>
         </div>
       </div>
-
-      {/* Mobile menu */}
-      {open && (
-        <div className="lg:hidden border-t bg-card pb-3">
-          {links.map((l) => (
-            <Link
-              key={l.to}
-              to={l.to}
-              onClick={() => setOpen(false)}
-              className={`block px-4 py-2.5 text-sm font-medium ${
-                isActive(l.to) ? "bg-accent text-accent-foreground" : "text-foreground"
-              }`}
-            >
-              {l.label}
-            </Link>
-          ))}
-          <Link to="/about" onClick={() => setOpen(false)} className="block px-4 py-2.5 text-sm font-medium text-foreground">
-            {t("हमारे बारे में", "About")}
-          </Link>
-        </div>
-      )}
     </nav>
   );
 };
