@@ -1,13 +1,11 @@
-import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Menu, X, Globe, Sun, Moon, Heart } from "lucide-react";
+import { Globe, Sun, Moon, Heart } from "lucide-react";
 import { useLang } from "@/contexts/LanguageContext";
 import { useTheme } from "@/hooks/useTheme";
 import { useBookmarks } from "@/hooks/useBookmarks";
 import { Button } from "@/components/ui/button";
 
 const Navbar = () => {
-  const [open, setOpen] = useState(false);
   const { lang, toggleLang, t } = useLang();
   const { dark, toggleTheme } = useTheme();
   const { totalCount } = useBookmarks();
