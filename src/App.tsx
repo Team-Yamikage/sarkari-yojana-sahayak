@@ -9,6 +9,7 @@ import BottomNav from "@/components/BottomNav";
 import InstallBanner from "@/components/InstallBanner";
 import Footer from "@/components/Footer";
 import AIChatbot from "@/components/AIChatbot";
+import OfflineBanner from "@/components/OfflineBanner";
 import Index from "./pages/Index";
 import EligibilityChecker from "./pages/EligibilityChecker";
 import SchemeExplainer from "./pages/SchemeExplainer";
