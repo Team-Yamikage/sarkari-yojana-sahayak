@@ -48,7 +48,7 @@ const AIChatbot = () => {
       {/* Floating Button */}
       <button
         onClick={() => setOpen(!open)}
-        className="fixed bottom-5 right-5 z-50 h-14 w-14 rounded-full bg-primary text-primary-foreground shadow-lg flex items-center justify-center hover:scale-105 transition-transform"
+        className="fixed bottom-20 right-5 z-50 h-14 w-14 rounded-full bg-primary text-primary-foreground shadow-lg flex items-center justify-center hover:scale-105 transition-transform lg:bottom-5"
         aria-label="Chat"
       >
         {open ? <X className="h-6 w-6" /> : <MessageCircle className="h-6 w-6" />}
@@ -56,7 +56,7 @@ const AIChatbot = () => {
 
       {/* Chat Panel */}
       {open && (
-        <div className="fixed bottom-22 right-5 z-50 w-[340px] max-w-[calc(100vw-2.5rem)] h-[460px] bg-card border rounded-xl shadow-2xl flex flex-col overflow-hidden">
+        <div className="fixed bottom-36 right-5 z-50 w-[340px] max-w-[calc(100vw-2.5rem)] h-[400px] lg:bottom-22 lg:h-[460px] bg-card border rounded-xl shadow-2xl flex flex-col overflow-hidden">
           {/* Header */}
           <div className="bg-primary text-primary-foreground px-4 py-3 flex items-center gap-2">
             <Bot className="h-5 w-5" />

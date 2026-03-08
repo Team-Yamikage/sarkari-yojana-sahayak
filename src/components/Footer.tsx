@@ -3,7 +3,7 @@ import { useLang } from "@/contexts/LanguageContext";
 const Footer = () => {
   const { t } = useLang();
   return (
-    <footer className="border-t bg-card mt-auto">
+    <footer className="border-t bg-card mt-auto hidden lg:block">
       <div className="container py-6 text-center text-sm text-muted-foreground">
         <p className="font-hindi">
           {t(

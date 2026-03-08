@@ -5,6 +5,8 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { LanguageProvider } from "@/contexts/LanguageContext";
 import Navbar from "@/components/Navbar";
+import BottomNav from "@/components/BottomNav";
+import InstallBanner from "@/components/InstallBanner";
 import Footer from "@/components/Footer";
 import AIChatbot from "@/components/AIChatbot";
 import Index from "./pages/Index";
@@ -30,7 +32,7 @@ const App = () => (
         <BrowserRouter>
           <div className="flex flex-col min-h-screen">
             <Navbar />
-            <main className="flex-1">
+            <main className="flex-1 pb-16 lg:pb-0">
               <Routes>
                 <Route path="/" element={<Index />} />
                 <Route path="/eligibility" element={<EligibilityChecker />} />
@@ -46,7 +48,9 @@ const App = () => (
               </Routes>
             </main>
             <Footer />
+            <InstallBanner />
             <AIChatbot />
+            <BottomNav />
           </div>
         </BrowserRouter>
       </LanguageProvider>
