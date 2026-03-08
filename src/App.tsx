@@ -9,6 +9,7 @@ import BottomNav from "@/components/BottomNav";
 import InstallBanner from "@/components/InstallBanner";
 import Footer from "@/components/Footer";
 import AIChatbot from "@/components/AIChatbot";
+import OfflineBanner from "@/components/OfflineBanner";
 import Index from "./pages/Index";
 import EligibilityChecker from "./pages/EligibilityChecker";
 import SchemeExplainer from "./pages/SchemeExplainer";
@@ -31,6 +32,7 @@ const App = () => (
         <Sonner />
         <BrowserRouter>
           <div className="flex flex-col min-h-screen">
+            <OfflineBanner />
             <Navbar />
             <main className="flex-1 pb-16 lg:pb-0">
               <Routes>
