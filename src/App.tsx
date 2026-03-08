@@ -32,6 +32,7 @@ const App = () => (
         <Sonner />
         <BrowserRouter>
           <div className="flex flex-col min-h-screen">
+            <OfflineBanner />
             <Navbar />
             <main className="flex-1 pb-16 lg:pb-0">
               <Routes>
