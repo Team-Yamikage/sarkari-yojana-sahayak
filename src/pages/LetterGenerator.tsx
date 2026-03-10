@@ -108,9 +108,18 @@ const LetterGenerator = () => {
           <CardHeader className="flex flex-row items-center justify-between">
             <CardTitle className="font-hindi">{t("आपका पत्र", "Your Letter")}</CardTitle>
             {result && (
-              <Button variant="outline" size="sm" onClick={copyToClipboard}>
-                {copied ? <Check className="h-4 w-4" /> : <Copy className="h-4 w-4" />}
-              </Button>
+              <div className="flex gap-1">
+                <Button variant="outline" size="sm" onClick={copyToClipboard}>
+                  {copied ? <Check className="h-4 w-4" /> : <Copy className="h-4 w-4" />}
+                </Button>
+                <Button variant="outline" size="sm" onClick={() => downloadTextAsPdf(
+                  form.reason ? `Application Letter - ${form.reason}` : "Application Letter",
+                  result,
+                  `letter-${form.reason || "application"}.pdf`
+                )}>
+                  <Download className="h-4 w-4" />
+                </Button>
+              </div>
             )}
           </CardHeader>
           <CardContent>

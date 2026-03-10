@@ -92,10 +92,24 @@ const DocumentChecklist = () => {
                     </span>
                   </label>
                 ))}
-                <Button onClick={() => window.print()} variant="outline" className="w-full mt-4 gap-2 font-hindi">
-                  <Printer className="h-4 w-4" />
-                  {t("चेकलिस्ट प्रिंट करें", "Print Checklist")}
-                </Button>
+                <div className="flex gap-2 mt-4">
+                  <Button onClick={() => window.print()} variant="outline" className="flex-1 gap-2 font-hindi">
+                    <Printer className="h-4 w-4" />
+                    {t("प्रिंट करें", "Print")}
+                  </Button>
+                  <Button
+                    onClick={() => downloadChecklistAsPdf(
+                      lang === "hi" ? selected!.name_hi : selected!.name_en,
+                      docs,
+                      checked
+                    )}
+                    variant="outline"
+                    className="flex-1 gap-2 font-hindi"
+                  >
+                    <Download className="h-4 w-4" />
+                    {t("PDF डाउनलोड", "Download PDF")}
+                  </Button>
+                </div>
               </CardContent>
             </Card>
           )}
