@@ -6,7 +6,8 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import { supabase } from "@/integrations/supabase/client";
-import { Loader2, Printer, FileCheck } from "lucide-react";
+import { Loader2, Printer, FileCheck, Download } from "lucide-react";
+import { downloadChecklistAsPdf } from "@/lib/generatePdf";
 
 interface Scheme {
   id: string;
