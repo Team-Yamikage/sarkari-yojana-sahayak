@@ -1,6 +1,7 @@
 import { Link, useLocation } from "react-router-dom";
-import { Globe, Sun, Moon, Heart } from "lucide-react";
+import { Globe, Sun, Moon, Heart, User, LogIn } from "lucide-react";
 import { useLang } from "@/contexts/LanguageContext";
+import { useAuth } from "@/contexts/AuthContext";
 import { useTheme } from "@/hooks/useTheme";
 import { useBookmarks } from "@/hooks/useBookmarks";
 import { Button } from "@/components/ui/button";
@@ -9,6 +10,7 @@ const Navbar = () => {
   const { lang, toggleLang, t } = useLang();
   const { dark, toggleTheme } = useTheme();
   const { totalCount } = useBookmarks();
+  const { user } = useAuth();
   const location = useLocation();
 
   const links = [
@@ -19,6 +21,7 @@ const Navbar = () => {
     { to: "/govt-jobs", label: t("नौकरी", "Jobs") },
     { to: "/documents", label: t("दस्तावेज़", "Documents") },
     { to: "/compare", label: t("तुलना", "Compare") },
+    { to: "/tracker", label: t("ट्रैकर", "Tracker") },
   ];
 
   const isActive = (path: string) => location.pathname === path;
@@ -54,6 +57,20 @@ const Navbar = () => {
               </span>
             )}
           </Link>
+          {user ? (
+            <Link to="/profile">
+              <Button variant="ghost" size="icon" className="ml-1 h-9 w-9">
+                <User className={`h-4 w-4 ${isActive("/profile") ? "text-primary" : ""}`} />
+              </Button>
+            </Link>
+          ) : (
+            <Link to="/auth">
+              <Button variant="outline" size="sm" className="ml-1 gap-1 font-hindi">
+                <LogIn className="h-4 w-4" />
+                {t("लॉगिन", "Login")}
+              </Button>
+            </Link>
+          )}
           <Button variant="ghost" size="icon" onClick={toggleTheme} className="ml-1 h-9 w-9">
             {dark ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
           </Button>
@@ -63,8 +80,21 @@ const Navbar = () => {
           </Button>
         </div>
 
-        {/* Mobile controls only (menu moved to bottom nav) */}
+        {/* Mobile controls */}
         <div className="flex lg:hidden items-center gap-1">
+          {user ? (
+            <Link to="/profile">
+              <Button variant="ghost" size="icon" className="h-9 w-9">
+                <User className="h-4 w-4" />
+              </Button>
+            </Link>
+          ) : (
+            <Link to="/auth">
+              <Button variant="ghost" size="icon" className="h-9 w-9">
+                <LogIn className="h-4 w-4" />
+              </Button>
+            </Link>
+          )}
           <Button variant="ghost" size="icon" onClick={toggleTheme} className="h-9 w-9">
             {dark ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
           </Button>

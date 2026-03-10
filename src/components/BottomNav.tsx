@@ -19,6 +19,7 @@ const BottomNav = () => {
     { to: "/letter", label: t("पत्र बनाएं", "Letter") },
     { to: "/documents", label: t("दस्तावेज़", "Documents") },
     { to: "/compare", label: t("तुलना", "Compare") },
+    { to: "/tracker", label: t("ट्रैकर", "Tracker") },
     { to: "/saved", label: t("सेव किये", "Saved") },
     { to: "/about", label: t("हमारे बारे में", "About") },
   ];

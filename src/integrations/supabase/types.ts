@@ -14,6 +14,47 @@ export type Database = {
   }
   public: {
     Tables: {
+      application_tracker: {
+        Row: {
+          applied_at: string
+          id: string
+          notes: string | null
+          scheme_id: string | null
+          scheme_name: string
+          status: Database["public"]["Enums"]["application_status"]
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          applied_at?: string
+          id?: string
+          notes?: string | null
+          scheme_id?: string | null
+          scheme_name: string
+          status?: Database["public"]["Enums"]["application_status"]
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          applied_at?: string
+          id?: string
+          notes?: string | null
+          scheme_id?: string | null
+          scheme_name?: string
+          status?: Database["public"]["Enums"]["application_status"]
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "application_tracker_scheme_id_fkey"
+            columns: ["scheme_id"]
+            isOneToOne: false
+            referencedRelation: "schemes"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       districts: {
         Row: {
           id: number
@@ -157,6 +198,51 @@ export type Database = {
         }
         Relationships: []
       }
+      profiles: {
+        Row: {
+          age: number | null
+          annual_income: number | null
+          category: string | null
+          created_at: string
+          district: string | null
+          full_name: string
+          gender: string | null
+          id: string
+          mobile_number: string
+          occupation: string | null
+          state: string | null
+          updated_at: string
+        }
+        Insert: {
+          age?: number | null
+          annual_income?: number | null
+          category?: string | null
+          created_at?: string
+          district?: string | null
+          full_name?: string
+          gender?: string | null
+          id: string
+          mobile_number?: string
+          occupation?: string | null
+          state?: string | null
+          updated_at?: string
+        }
+        Update: {
+          age?: number | null
+          annual_income?: number | null
+          category?: string | null
+          created_at?: string
+          district?: string | null
+          full_name?: string
+          gender?: string | null
+          id?: string
+          mobile_number?: string
+          occupation?: string | null
+          state?: string | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
       schemes: {
         Row: {
           apply_link: string | null
@@ -231,7 +317,12 @@ export type Database = {
       [_ in never]: never
     }
     Enums: {
-      [_ in never]: never
+      application_status:
+        | "applied"
+        | "documents_submitted"
+        | "under_review"
+        | "approved"
+        | "rejected"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -358,6 +449,14 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      application_status: [
+        "applied",
+        "documents_submitted",
+        "under_review",
+        "approved",
+        "rejected",
+      ],
+    },
   },
 } as const
