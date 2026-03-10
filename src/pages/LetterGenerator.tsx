@@ -7,8 +7,9 @@ import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { supabase } from "@/integrations/supabase/client";
-import { Loader2, Copy, Check } from "lucide-react";
+import { Loader2, Copy, Check, Download } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import { downloadTextAsPdf } from "@/lib/generatePdf";
 
 const LetterGenerator = () => {
   const { t, lang } = useLang();
